@@ -22,6 +22,7 @@ def is_split_character(c):
     if c in split_symbols:
         return True
     return False
+
         
 def skip_splits(text, i):
     '''
@@ -42,6 +43,7 @@ def skip_splits(text, i):
     while i < len(text) and is_split_character(text[i]):
         i += 1
     return i
+
 
 def extract_word(text, i):
     '''
@@ -68,6 +70,7 @@ def extract_word(text, i):
         
     return i, text[word_start: i]
 
+
 def get_words(text):
     '''
     Returns words, presented in text
@@ -90,6 +93,7 @@ def get_words(text):
             break
         
         yield word.lower()
+
             
 def encode_word(word):
     '''
@@ -116,6 +120,7 @@ def encode_word(word):
         code[idx] += 1
         
     return code
+
             
 def encode_text(text):
     '''
@@ -142,4 +147,3 @@ def encode_text(text):
         codes.append(code)
         
     return words, codes
-
