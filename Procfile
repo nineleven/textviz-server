@@ -1,1 +1,1 @@
-web: gunicorn server.textviz.wsgi --preload
+web: gunicorn textviz.wsgi --preload
