@@ -3,4 +3,5 @@ psycopg2
 flake8
 gunicorn
 django_heroku
+django-environ
 pytest
