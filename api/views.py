@@ -1,30 +1,33 @@
-from django.http import JsonResponse, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import SampleText
-
 from .logic import encode_text
+from .serializers import SampleTextsSerializer, SpecificTextSerializer
 
 
-def get_available_texts_view(request):
-    texts = SampleText.objects.all()
-    return JsonResponse({'context': [text.name for text in texts]})
+class SampleTextsView(APIView):
+    def get(self, request):
+        texts = SampleText.objects.all()
+        serializer = SampleTextsSerializer(texts, many=True)
+        return Response(serializer.data)
 
     
-def get_text_view(request):
-    if request.method == 'GET':
+class SpecificTextView(APIView):
+    def get(self, request):
         text_name = request.GET['name'].replace('+', ' ')
         text = SampleText.objects.filter(name__startswith=text_name)[0]
-        return JsonResponse({'context': text.text})
-    return HttpResponseNotFound('Please, use GET method')
+        serializer = SpecificTextSerializer(text, many=False)
+        return Response(serializer.data)
 
 
-@csrf_exempt
-def encode_text_view(request):
-    if request.method == 'POST':
+class EncodeTextsView(APIView):
+    # @csrf_exempt
+    def post(self, request):
         text = request.body.decode('utf-8')
         words, codes = encode_text(text)
 
-        return JsonResponse({'words': words,
-                             'codes': codes})
-    return HttpResponseNotFound('Please, use POST method')
+        return Response({'words': words,
+                         'codes': codes})
