@@ -1,7 +1,11 @@
 django
-psycopg2
-flake8
-gunicorn
-django_heroku
 django-environ
+djangorestframework
+
+django_heroku
+gunicorn
+
+psycopg2
+
+flake8
 pytest
