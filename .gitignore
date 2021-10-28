@@ -1,0 +1,8 @@
+__pycache__
+
+/api/migrations
+
+.ipynb_checkpoints
+*.ipynb
+
+*.env

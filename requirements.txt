@@ -1,0 +1,11 @@
+django
+django-environ
+djangorestframework
+
+django_heroku
+gunicorn
+
+psycopg2
+
+flake8
+pytest
